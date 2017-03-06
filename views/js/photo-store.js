@@ -8,10 +8,12 @@ app.PhotoStore = function() {
           return photos;
         },
         load: function(num) {
-          var pageNum = num || 1;
-          app.flickrApi.getPhotos(pageNum);
+          var pageNum = num || 1,
+              api = app.flickrApi(),
+              loadedPhotos = api.getPhotos(pageNum);
+          console.log('my pageNum is %s', pageNum)
           // photos = ajax call for photos
-          // on success self.add(data.photos);
+          self.add(loadedPhotos);
         },
         find: function(id) {
           // for (var i = 0; i < photos.length; ++i) {
