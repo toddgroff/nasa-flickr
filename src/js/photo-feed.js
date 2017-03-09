@@ -7,21 +7,29 @@ app.photoFeed = function(){
       },
       renderItems: function(photos){
         photos.map(function(photo) {
-          var item = self.item(photo);
+          var item = self.buildItem(photo);
           photoFeedList.appendChild(item);
         });
       },
-      renderItem: function(photo){
+      buildItem: function(photo){
         var item = document.createElement('li'),
             img = document.createElement('img');
-        img.src = photo.url;
+        img.src = photo.url_o;
+        img.alt = photo.title
         img.className = 'feed-item-img';
         item.appendChild(img);
         item.className = 'feed-item';
         return item;
       },
       init: function(){
-        self.renderItems(app.photos.load());
+        var initialPhotos = app.photos.load();
+        initialPhotos.then(function(resp){
+          console.log(resp.data.photos.photo);
+          self.renderItems(resp.data.photos.photo);
+        }).catch(function(err){
+          console.log('Error', err);
+
+        });
       }
     };
   return self;

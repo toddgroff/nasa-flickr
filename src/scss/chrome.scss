@@ -1,0 +1,20 @@
+$neat-grid: (
+  columns: 12,
+  gutter: 0,
+);
+
+body {
+  @include grid-container;
+}
+
+.photo-feed-list {
+  @include grid-column(12);
+}
+
+.feed-item {
+  @include grid-column(3);
+}
+
+.feed-item-img {
+  width: 100%;
+}
