@@ -12,8 +12,8 @@ app.PhotoStore = function() {
               api = app.flickrApi(),
               loadedPhotos = api.getPhotos(pageNum);
           console.log('my pageNum is %s', pageNum)
-          // photos = ajax call for photos
           self.add(loadedPhotos);
+          return loadedPhotos;
         },
         find: function(id) {
           // for (var i = 0; i < photos.length; ++i) {
