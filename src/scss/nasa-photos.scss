@@ -104,7 +104,7 @@ button {
   bottom: 0;
   right: 0;
   left: 0;
-  padding: 3em 2em 1.5em 2em;
+  padding: 4em 2em 1.5em 2em;
   text-align: center;
   @include display(flex);
   @include align-items(center);
@@ -113,7 +113,7 @@ button {
 
   @include media($tablet){
     @include flex-direction(row);
-    padding: 2em 4em 1.5em 4em;
+    padding: 4em 4em 1.5em 4em;
   }
 
 }
