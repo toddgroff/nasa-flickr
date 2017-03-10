@@ -1,5 +1,4 @@
 app.PhotoStore = function() {
-  // var photos = [],
   var pageNum = 0,
       self = {
         _photos: [],
@@ -8,17 +7,25 @@ app.PhotoStore = function() {
         },
         set currentPhotos(newPhotos){
           this._photos = newPhotos;
-          console.log(newPhotos);
-          console.log(this._photos)
           console.log('There are now %s photos', this._photos.length);
           console.log('The first photo is now %s', this._photos[0].title);
+        },
+        _selected: null,
+        get currentSelected(){
+          return this._selected;
+        },
+        set currentSelected(id){
+          console.log('id coming in as ', id)
+          this._selected = id === null ? null : this.find(id);
+          console.log('selected', this.find(id));
+          this.currentSelected !== null && console.log('Photo #%s is now selected', this._selected);
+          app.selected.render(this._selected);
         },
         get currentPageNum() {
           return pageNum;
         },
         set currentPageNum(num) {
           pageNum = num;
-          return self.currentPageNum;
           console.log('the current page is now %s', self.currentPageNum);
         },
         add: function (newPhotosPromise) {
@@ -47,19 +54,21 @@ app.PhotoStore = function() {
           }
         },
         load: function() {
-          self.currentPageNum = ++self.currentPageNum
+          self.currentPageNum += 1
+          console.count();
           var loadedPhotosPromise = app.api.getPhotos(self.currentPageNum);
           if (self.currentPageNum > 1) console.log('my pageNum is %s', self.currentPageNum);
           self.add(loadedPhotosPromise);
           return loadedPhotosPromise;
         },
         find: function(id) {
-          // for (var i = 0; i < photos.length; ++i) {
-          //   if (photos[i].id === id) return photos[i];
-          // }
-          for (var photo in photos) {
-            if (photo.id === id) return photo;
+          for (var i = 0; i < this.currentPhotos.length; ++i) {
+            if (this.currentPhotos[i].id === id) return this.currentPhotos[i];
           }
+          // for (var photo in this.currentPhotos) {
+          //   if (photo.id === id) return photo;
+          // }
+          // return null;
         },
       };
   return self;

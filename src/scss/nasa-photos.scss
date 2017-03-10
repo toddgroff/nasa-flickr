@@ -33,7 +33,7 @@ button {
   font-size: 1.25em;
   font-family: sans-serif;
   letter-spacing: 3px;
-  border: 2px solid rgba(white, 0.85);
+  outline: 2px solid rgba(white, 0.85);
   transition: all 0.5s ease;
   cursor: pointer;
   width: 100%;
@@ -47,6 +47,41 @@ button {
   @include media($tablet){
     width: inherit;
   }
+}
+
+.selected-photo-container {
+  position: fixed;
+  top: 0;
+  bottom: 100%;
+  z-index: 20;
+  overflow: hidden;
+  /*max-height: 0;*/
+  opacity: 0;
+
+  &.active {
+    /*max-height: 2500px; //cannot animate "auto" value, so using max-height set to something larger than necessary*/
+    opacity: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @include transition(all 0.75s ease-in-out);
+    /*@include transition(max-height 0.75s ease-in-out, opacity 0.5s ease-out);*/
+  }
+}
+
+.selected-photo-close {
+  position: fixed {
+    top: 20px;
+    right: 20px;
+  }
+}
+
+.selected-photo-copy {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .photo-feed-list {

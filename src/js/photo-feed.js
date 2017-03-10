@@ -60,6 +60,13 @@ app.photoFeed = function(){
           });
         });
       },
+      setSelectPhoto: function(){
+        photoFeedList.addEventListener('click', function(e){
+          var parent = e.target.parentElement;
+          console.log('id from target', anchor.nodeName.toLowerCase() === 'a');
+          if (parent.nodeName.toLowerCase() === 'a') app.photos.currentSelected = parent.id;
+        });
+      },
       init: function(){
         var initialPhotos = app.photos.load();
         initialPhotos.then(function(resp){
@@ -67,12 +74,10 @@ app.photoFeed = function(){
         }).catch(function(err){
           console.log('Error:', err);
         });
-
-        photoFeedList.addEventListener('click', function(e){
-          // if (e.target.parentElement.nodeName.toLowerCase() === 'a') app.selectedPhoto.select(e.target.id);
-        });
         self.sortFeed();
         self.loadMoreToFeed();
+        self.setSelectPhoto();
+        app.selected.setclose();
       }
     };
   return self;
