@@ -9,8 +9,8 @@ app.selectedPhoto = function(){
           if (photo === null) {
             self.close();
           } else {
-            selectedPhotoTitle.innerText = photo.title;
-            selectedPhotoDesc.innerText = photo.description._content;
+            selectedPhotoTitle.innerHTML = photo.title;
+            selectedPhotoDesc.innerHTML = photo.description._content;
             // TODO: switch the assignment below for the call to getBestSize to get the best available image
             // selectedPhotoImg = app.photo.getBestSize();
             // selectedPhotoImg.src = photo.url_l;
