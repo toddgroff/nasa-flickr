@@ -15,7 +15,7 @@ app.photoFeed = function(){
         var item = document.createElement('li'),
             img = document.createElement('img');
             link = document.createElement('a');
-        img.src = photo.url_o;
+        img.src = photo.url_l;
         img.alt = photo.title;
         img.className = 'feed-item-img';
         link.href = '#selected-photo';
@@ -30,8 +30,7 @@ app.photoFeed = function(){
           console.log(resp.data.photos.photo);
           self.renderItems(resp.data.photos.photo);
         }).catch(function(err){
-          console.log('Error', err);
-
+          console.log('Error:', err);
         });
       }
     };

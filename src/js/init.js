@@ -1,6 +1,8 @@
 // // initialize the application
 window.onload = function(){
-  console.log('init it');
+
+  app.api = app.flickrApi();
+
   app.photos = app.PhotoStore();
 
   app.feed = app.photoFeed();

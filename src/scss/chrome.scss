@@ -8,20 +8,24 @@ body {
 
 header {
   position: fixed;
-  top: 0
+  top: 0;
+  z-index: 10;
+}
+
+.nasa-logo {
+  width: 150px;
+  margin: 15px;
 }
 
 .photo-feed-list {
   @include display(flex);
   @include flex-flow(row wrap);
-  @include align-items(center);
 }
 
 .feed-item {
   width: 25%;
-  max-height: 350px;
+  height: 350px;
   overflow: hidden;
-  position: relative;
 
   a {
     @include transition(opacity 0.75s ease);
@@ -34,7 +38,7 @@ header {
 }
 
 .feed-item-img {
-  width: 100%;
+  width: 100%
 }
 
 .feed-controls {
@@ -48,43 +52,3 @@ header {
   right: 0;
   left: 0;
 }
-
-/*body {
-  @include outer-container;
-}
-
-.photo-feed-list {
-  @include display(flex);
-  @include flex-flow(row wrap);
-  @include align-items(stretch);
-}
-
-.feed-item {
-  width: 25%;
-}
-
-.feed-item-img {
-  width: 100%;
-}*/
-
-
-/*$neat-grid: (
-  columns: 12,
-  gutter: 0,
-);
-
-body {
-  @include grid-container;
-}
-
-.photo-feed-list {
-  @include grid-column(12);
-}
-
-.feed-item {
-  @include grid-column(3);
-}
-
-.feed-item-img {
-  width: 100%;
-}*/

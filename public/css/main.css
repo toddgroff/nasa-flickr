@@ -63,7 +63,12 @@ body {
 
 header {
   position: fixed;
-  top: 0; }
+  top: 0;
+  z-index: 10; }
+
+.nasa-logo {
+  width: 150px;
+  margin: 15px; }
 
 .photo-feed-list {
   display: -webkit-box;
@@ -75,22 +80,12 @@ header {
   display: flex;
   -webkit-flex-flow: row wrap;
   -moz-flex-flow: row wrap;
-  flex-flow: row wrap;
-  -webkit-box-align: center;
-  -moz-box-align: center;
-  box-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
-  -o-align-items: center;
-  align-items: center;
-  -ms-flex-align: center; }
+  flex-flow: row wrap; }
 
 .feed-item {
   width: 25%;
-  max-height: 350px;
-  overflow: hidden;
-  position: relative; }
+  height: 350px;
+  overflow: hidden; }
   .feed-item a {
     -webkit-transition: opacity 0.75s ease;
     -moz-transition: opacity 0.75s ease;
@@ -118,41 +113,3 @@ header {
   bottom: 0;
   right: 0;
   left: 0; }
-
-/*body {
-  @include outer-container;
-}
-
-.photo-feed-list {
-  @include display(flex);
-  @include flex-flow(row wrap);
-  @include align-items(stretch);
-}
-
-.feed-item {
-  width: 25%;
-}
-
-.feed-item-img {
-  width: 100%;
-}*/
-/*$neat-grid: (
-  columns: 12,
-  gutter: 0,
-);
-
-body {
-  @include grid-container;
-}
-
-.photo-feed-list {
-  @include grid-column(12);
-}
-
-.feed-item {
-  @include grid-column(3);
-}
-
-.feed-item-img {
-  width: 100%;
-}*/
