@@ -4,8 +4,11 @@ app.selectedPhoto = function(){
       selectedPhotoDesc = document.getElementById('selected-photo-description'),
       selectedPhotoImg = document.getElementById('selectedPhotoImg'),
       self = {
-        select: function(id){
-          // app.photos.find();
+        renderSelectedPhoto: function(id){
+          var photo = app.photos.find(id);
+          selectedPhotoTitle.innerText = photo.title;
+          selectedPhotoDesc = photo.description.content;
+          selectedPhotoImg = photo.image
         }
   };
   return self;
