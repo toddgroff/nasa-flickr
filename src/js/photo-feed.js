@@ -14,10 +14,13 @@ app.photoFeed = function(){
       buildItem: function(photo){
         var item = document.createElement('li'),
             img = document.createElement('img');
+            link = document.createElement('a');
         img.src = photo.url_o;
-        img.alt = photo.title
+        img.alt = photo.title;
         img.className = 'feed-item-img';
-        item.appendChild(img);
+        link.href = '#selected-photo';
+        link.appendChild(img);
+        item.appendChild(link);
         item.className = 'feed-item';
         return item;
       },

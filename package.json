@@ -14,12 +14,13 @@
     "assets": "cp -R src/assets/ public/assets/",
     "build-css": "node-sass --include-path scss src/scss/main.scss public/css/main.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-    "uglify-js-minify": "uglifyjs src/js/*.js -m -c -o public/js/app.min.js",
+    "uglify-js": "uglifyjs src/js/*.js -o public/js/app.min.js --source-map public/js/app.min.js.map -m toplevel -c",
+    "uglify-js-minify": "uglifyjs src/js/*.js src/js/init.js -m -c -o public/js/app.min.js",
     "uglify-js-mangle": "mkdir -p public/js && uglifyjs src/js/*.js -m -o public/js/app.js",
     "lint": "jshint *.js **/*.js",
     "build": "npm run html && npm run assets && npm run build-css",
     "build-prod": "npm run build && npm run uglify-js-minify",
-    "build-dev": "npm run build && npm run watch-css && npm run uglify-js-mangle"
+    "build-dev": "npm run build && npm run uglify-js && npm run watch-css"
   },
   "repository": {
     "type": "git",
@@ -28,11 +29,12 @@
   "dependencies": {
     "body-parser": "^1.16.1",
     "bourbon": "^4.3.3",
-    "bourbon-neat": "^2.0.0",
+    "bourbon-neat": "^1.8.0",
     "cfenv": "^1.0.x",
     "cloudant": "^1.7.1",
     "dotenv": "^4.0.0",
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "reset-css": "^2.2.0"
   },
   "devDependencies": {
     "jshint": "^2.9.4",
