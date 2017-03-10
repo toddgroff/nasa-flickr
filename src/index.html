@@ -14,18 +14,19 @@
     <img class="nasa-logo" src="assets/NASA_logo.png" alt="Nasa logo" />
   </header>
   <div class="main">
-    <div id="selected-photo" class="selected-photo">
-      <h2 class="photo-title"></h2>
-      <p class="photo-description">
+    <div id="selected-photo-container" class="selected-photo-container">
+      <h2 id="selected-photo-title" class="selected-photo-title"></h2>
+      <p id="selected-photo-description" class="selected-photo-description">
       </p>
-
+      <img id="selected-photo-img" class="selected-photo-img"/>
     </div>
-    <div class="photo-feed">
+    <div class="photo-feed-container">
       <ul id="photo-feed-list" class="photo-feed-list">
         <!-- Photos rendered here on success -->
       </ul>
       <div class="feed-controls">
-
+        <button id="sort-by-date" class="desc">sort by date</button>
+        <button id="load-more-photos">load more photos</button>
       </div>
     </div>
   </div>

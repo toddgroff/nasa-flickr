@@ -1,6 +1,14 @@
 app.PhotoStore = function() {
   var photos = [],
+      pageNum = 0,
       self = {
+        get currentPageNum() {
+          return pageNum;
+        },
+        set currentPageNum(num) {
+          pageNum = num;
+          return self.currentPageNum;
+        },
         add: function (newPhotosPromise) {
           newPhotosPromise.then(function(resp){
             photos.push.apply(photos, resp.data.photos.photo);
@@ -14,10 +22,10 @@ app.PhotoStore = function() {
           console.log('in query');
           return photos;
         },
-        load: function(num) {
-          var pageNum = num || 1,
-              loadedPhotosPromise = app.api.getPhotos(pageNum);
-          if (pageNum > 1) console.log('my pageNum is %s', pageNum);
+        load: function() {
+          self.currentPageNum = ++self.currentPageNum
+          var loadedPhotosPromise = app.api.getPhotos(self.currentPageNum);
+          if (self.currentPageNum > 1) console.log('my pageNum is %s', self.currentPageNum);
           self.add(loadedPhotosPromise);
           return loadedPhotosPromise;
         },

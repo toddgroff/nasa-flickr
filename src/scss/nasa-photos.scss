@@ -12,6 +12,25 @@ header {
   z-index: 10;
 }
 
+button {
+  padding: 15px 40px;
+  background: transparent;
+  color: rgba(white, 0.85);
+  text-transform: uppercase;
+  font-size: 1.25em;
+  font-family: sans-serif;
+  letter-spacing: 3px;
+  border: 2px solid rgba(white, 0.85);
+  transition: all 0.5s ease;
+  cursor: pointer;
+
+  &:hover, &:focus {
+    color: rgba(black,0.5);
+    background: rgba(white, 0.85);
+    transition: all 0.5s ease;
+  }
+}
+
 .nasa-logo {
   width: 150px;
   margin: 15px;
@@ -73,4 +92,10 @@ header {
   bottom: 0;
   right: 0;
   left: 0;
+  padding: 2em 4em;
+  text-align: center;
+  @include display(flex);
+  @include align-items(center);
+  @include justify-content(space-around);
+
 }

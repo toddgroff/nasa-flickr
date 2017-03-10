@@ -1,15 +1,17 @@
 app.photoFeed = function(){
   var photoFeedList = document.getElementById('photo-feed-list'),
       self = {
-        addItems: function(newPhotos){
-          return newPhotos.map(function(photo) {
-        });
-      },
-      renderItems: function(photos){
+      renderItems: function(photos, replace){
+        var replacePhotos = replace || false,
+            items = [];
         photos.map(function(photo) {
           var item = self.buildItem(photo);
-          photoFeedList.appendChild(item);
+          items.push(item);
         });
+        replacePhotos
+        ? photoFeedList.innerHTML = items
+        : photoFeedList.innerHTML += items
+        // photoFeedList.appendChild(item);
       },
       buildItem: function(photo){
         var item = document.createElement('li'),
@@ -33,6 +35,18 @@ app.photoFeed = function(){
         item.className = 'feed-item';
         return item;
       },
+      sort: function(dir){
+        var sortedPhotos = app.photos.query().sort(fucntion(a,b){
+          if (dir < 0) {
+            if ((dir < 0 && a.datetaken < b.datetaken)|| (dir > 0 && a.datetaken < b.datetaken)) {
+              return -1;
+            } else {
+              return 1;
+            }
+          }
+        });
+        self.renderItems(sortedPhotos,true);
+      },
       init: function(){
         var initialPhotos = app.photos.load();
         initialPhotos.then(function(resp){
@@ -41,10 +55,23 @@ app.photoFeed = function(){
           console.log('Error:', err);
         });
         photoFeedList.addEventListener('click', function(e){
-          console.log(e.target.parentNode.nodeType)
-          if (e.target.parentNode.nodeType === 'anchor') console.log('clicked the link');
-          // if (e.target.type === 'anchor') app.selectedPhoto.select(e.target.id);
+          // if (e.target.parentElement.nodeName.toLowerCase() === 'a') app.selectedPhoto.select(e.target.id);
         });
+        document.getElementById('load-more-photos').addEventListener('click', function(){
+          app.photos.load().then(function(resp){
+            var newPhotos = resp.data.photos.photo;
+            self.renderItems(newPhotos);
+            document.getElementById(newPhotos[0].id).focus();
+          }).catch(function(err){
+            console.log('Error:', err);
+          });
+        });
+        document.getElementById('sort-by-date').addEventListener('click' function(e){
+          var sortDir = e.target.getAttribute('data-sort-dir');
+              oppSortDir = ParseInt(sortDir) * -1;
+          self.sort(sortDir);
+          e.target.setAttribute('data-sort-dir', oppSortDir);
+        })
       }
     };
   return self;
