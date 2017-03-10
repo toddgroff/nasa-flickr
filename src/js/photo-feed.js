@@ -37,16 +37,26 @@ app.photoFeed = function(){
         item.className = 'feed-item';
         return item;
       },
+      getDate: function(photo){
+        return new Date(photo.dateuploaded);
+      },
       sort: function(dir){
         var sortedPhotos = app.photos.query().sort(function(a,b){
-          if (dir < 0) {
-            if ((dir < 0 && a.datetaken < b.datetaken)|| (dir > 0 && a.datetaken < b.datetaken)) {
-              return -1;
-            } else {
-              return 1;
-            }
+          var aDate = self.getDate(a),
+              bDate = self.getDate(b);
+              console.log(aDate, bDate);
+          if ((dir > 0 && aDate < bDate) || (dir < 0 && aDate > bDate)) {
+            return -1;
+          } else {
+            return 1;
           }
         });
+        var newDates = []
+        console.log('sortedPhotos', sortedPhotos)
+        for (var i = 0; i < sortedPhotos.length; ++i) {
+          newDates.push(sortedPhotos[i].dateuploaded);
+        }
+        console.log('newDates',newDates);
         self.renderItems(sortedPhotos,true);
       },
       init: function(){
@@ -69,8 +79,9 @@ app.photoFeed = function(){
           });
         });
         document.getElementById('sort-by-date').addEventListener('click', function(e){
-          var sortDir = e.target.getAttribute('data-sort-dir');
-              oppSortDir = parseInt(sortDir) * -1;
+          var sortDir = parseInt(e.target.getAttribute('data-sort-dir'));
+              oppSortDir = sortDir* -1;
+          console.log('sortDir', sortDir);
           self.sort(sortDir);
           e.target.setAttribute('data-sort-dir', oppSortDir);
         })
