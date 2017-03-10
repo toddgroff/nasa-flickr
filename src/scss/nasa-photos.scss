@@ -1,4 +1,6 @@
 $max-width: 100%;
+$tablet: min-width 450px;
+$desktop: min-width 769px;
 
 body {
   background: black;
@@ -12,8 +14,19 @@ header {
   z-index: 10;
 }
 
+.nasa-logo {
+  width: 75px;
+  margin: 10px;
+
+  @include media($tablet) {
+    width: 150px;
+    margin: 15px;
+  }
+}
+
 button {
-  padding: 15px 40px;
+  padding: 0.75em;
+  margin-bottom: 0.75em;
   background: transparent;
   color: rgba(white, 0.85);
   text-transform: uppercase;
@@ -23,17 +36,17 @@ button {
   border: 2px solid rgba(white, 0.85);
   transition: all 0.5s ease;
   cursor: pointer;
+  width: 100%;
 
   &:hover, &:focus {
     color: rgba(black,0.5);
     background: rgba(white, 0.85);
     transition: all 0.5s ease;
   }
-}
 
-.nasa-logo {
-  width: 150px;
-  margin: 15px;
+  @include media($tablet){
+    width: inherit;
+  }
 }
 
 .photo-feed-list {
@@ -62,11 +75,11 @@ button {
     padding-top: 100%;
   }
 
-  @include media(min-width 450px){
+  @include media($tablet){
     width: calc(100% / 3);
   }
 
-  @include media(min-width 769px){
+  @include media($desktop){
     width: 25%;
   }
 }
@@ -87,15 +100,20 @@ button {
   background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.07) 6%,rgba(0,0,0,0.57) 29%,rgba(0,0,0,0.66) 42%,rgba(0,0,0,0.8) 58%,rgba(0,0,0,0.93) 85%,rgba(0,0,0,0.95) 89%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.07) 6%,rgba(0,0,0,0.57) 29%,rgba(0,0,0,0.66) 42%,rgba(0,0,0,0.8) 58%,rgba(0,0,0,0.93) 85%,rgba(0,0,0,0.95) 89%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#f2000000',GradientType=0 ); /* IE6-9 */
-  height: 200px;
   position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
-  padding: 2em 4em;
+  padding: 3em 2em 1.5em 2em;
   text-align: center;
   @include display(flex);
   @include align-items(center);
   @include justify-content(space-around);
+  @include flex-direction(column);
+
+  @include media($tablet){
+    @include flex-direction(row);
+    padding: 2em 4em 1.5em 4em;
+  }
 
 }

@@ -4,14 +4,16 @@ app.photoFeed = function(){
       renderItems: function(photos, replace){
         var replacePhotos = replace || false,
             items = [];
+
+        if (replacePhotos) {
+          while (photoFeedList.firstChild) {
+              photoFeedList.removeChild(photoFeedList.firstChild);
+          }
+        }
         photos.map(function(photo) {
           var item = self.buildItem(photo);
-          items.push(item);
+          photoFeedList.appendChild(item);
         });
-        replacePhotos
-        ? photoFeedList.innerHTML = items
-        : photoFeedList.innerHTML += items
-        // photoFeedList.appendChild(item);
       },
       buildItem: function(photo){
         var item = document.createElement('li'),
@@ -36,7 +38,7 @@ app.photoFeed = function(){
         return item;
       },
       sort: function(dir){
-        var sortedPhotos = app.photos.query().sort(fucntion(a,b){
+        var sortedPhotos = app.photos.query().sort(function(a,b){
           if (dir < 0) {
             if ((dir < 0 && a.datetaken < b.datetaken)|| (dir > 0 && a.datetaken < b.datetaken)) {
               return -1;
@@ -66,9 +68,9 @@ app.photoFeed = function(){
             console.log('Error:', err);
           });
         });
-        document.getElementById('sort-by-date').addEventListener('click' function(e){
+        document.getElementById('sort-by-date').addEventListener('click', function(e){
           var sortDir = e.target.getAttribute('data-sort-dir');
-              oppSortDir = ParseInt(sortDir) * -1;
+              oppSortDir = parseInt(sortDir) * -1;
           self.sort(sortDir);
           e.target.setAttribute('data-sort-dir', oppSortDir);
         })

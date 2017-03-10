@@ -66,8 +66,17 @@ header {
   top: 0;
   z-index: 10; }
 
+.nasa-logo {
+  width: 75px;
+  margin: 10px; }
+  @media screen and (min-width: 450px) {
+    .nasa-logo {
+      width: 150px;
+      margin: 15px; } }
+
 button {
-  padding: 15px 40px;
+  padding: 0.75em;
+  margin-bottom: 0.75em;
   background: transparent;
   color: rgba(255, 255, 255, 0.85);
   text-transform: uppercase;
@@ -76,15 +85,15 @@ button {
   letter-spacing: 3px;
   border: 2px solid rgba(255, 255, 255, 0.85);
   transition: all 0.5s ease;
-  cursor: pointer; }
+  cursor: pointer;
+  width: 100%; }
   button:hover, button:focus {
     color: rgba(0, 0, 0, 0.5);
     background: rgba(255, 255, 255, 0.85);
     transition: all 0.5s ease; }
-
-.nasa-logo {
-  width: 150px;
-  margin: 15px; }
+  @media screen and (min-width: 450px) {
+    button {
+      width: inherit; } }
 
 .photo-feed-list {
   display: -webkit-box;
@@ -142,12 +151,11 @@ button {
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#f2000000',GradientType=0 );
   /* IE6-9 */
-  height: 200px;
   position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
-  padding: 2em 4em;
+  padding: 3em 2em 1.5em 2em;
   text-align: center;
   display: -webkit-box;
   display: -moz-box;
@@ -173,4 +181,27 @@ button {
   -ms-justify-content: space-around;
   -o-justify-content: space-around;
   justify-content: space-around;
-  -ms-flex-pack: distribute; }
+  -ms-flex-pack: distribute;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-direction: column; }
+  @media screen and (min-width: 450px) {
+    .feed-controls {
+      -webkit-box-orient: horizontal;
+      -moz-box-orient: horizontal;
+      box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -moz-box-direction: normal;
+      box-direction: normal;
+      -webkit-flex-direction: row;
+      -moz-flex-direction: row;
+      flex-direction: row;
+      -ms-flex-direction: row;
+      padding: 2em 4em 1.5em 4em; } }
