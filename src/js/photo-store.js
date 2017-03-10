@@ -2,19 +2,20 @@ app.PhotoStore = function() {
   var photos = [],
       self = {
         add: function (newPhotosPromise) {
-            newPhotosPromise.then(function(resp){
-              photos.push.apply(photos, resp.data.photos.photos);
-              console.log(photos);
-            }).catch(function(err){
-              console.log('Error:', err);
-            });
+          newPhotosPromise.then(function(resp){
+            photos.push.apply(photos, resp.data.photos.photo);
+            console.log('photos are', photos);
+            console.log(self.query());
+          }).catch(function(err){
+            console.log('Error:', err);
+          });
         },
         query: function() {
+          console.log('in query');
           return photos;
         },
         load: function(num) {
           var pageNum = num || 1,
-              // api = app.flickrApi(),
               loadedPhotosPromise = app.api.getPhotos(pageNum);
           if (pageNum > 1) console.log('my pageNum is %s', pageNum);
           self.add(loadedPhotosPromise);

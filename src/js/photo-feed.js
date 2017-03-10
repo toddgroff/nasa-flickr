@@ -13,29 +13,43 @@ app.photoFeed = function(){
       },
       buildItem: function(photo){
         var item = document.createElement('li'),
-            img = document.createElement('img');
-            link = document.createElement('a');
+            img = new Image();
+            overlay = document.createElement('span'),
+            anchor = document.createElement('a');
+        anchor.href = '#selected-photo';
+        anchor.id = photo.id;
+        // anchor.className = 'img-not-loaded';
+        overlay.className = 'feed-item-overlay';
+        anchor.appendChild(overlay);
+
         img.src = photo.url_l;
-        img.alt = photo.title;
-        img.className = 'feed-item-img';
-        link.href = '#selected-photo';
-        link.appendChild(img);
-        item.appendChild(link);
+        img.onload = function(){
+          // var newClass = anchor.className.replace(/img-not-loaded/i, 'img-loaded');
+          // anchor.className = newClass;
+          item.style.backgroundImage = 'url('+img.src+')';
+        }
+        item.appendChild(anchor);
+        item.title = photo.title;
         item.className = 'feed-item';
         return item;
       },
       init: function(){
         var initialPhotos = app.photos.load();
         initialPhotos.then(function(resp){
-          console.log(resp.data.photos.photo);
           self.renderItems(resp.data.photos.photo);
         }).catch(function(err){
           console.log('Error:', err);
+        });
+        photoFeedList.addEventListener('click', function(e){
+          console.log(e.target.parentNode.nodeType)
+          if (e.target.parentNode.nodeType === 'anchor') console.log('clicked the link');
+          // if (e.target.type === 'anchor') app.selectedPhoto.select(e.target.id);
         });
       }
     };
   return self;
 };
+
 
 // function showPopularResults() {
 //       Api.getPopularList().done(function(response) {

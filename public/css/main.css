@@ -83,21 +83,39 @@ header {
   flex-flow: row wrap; }
 
 .feed-item {
-  width: 25%;
-  height: 350px;
-  overflow: hidden; }
+  width: 50%;
+  overflow: hidden;
+  background-position: center center;
+  position: relative; }
   .feed-item a {
     -webkit-transition: opacity 0.75s ease;
     -moz-transition: opacity 0.75s ease;
     transition: opacity 0.75s ease; }
-    .feed-item a:hover {
-      opacity: 0.65;
+    .feed-item a:hover, .feed-item a:focus {
+      opacity: 0;
       -webkit-transition: opacity 0.75s ease;
       -moz-transition: opacity 0.75s ease;
       transition: opacity 0.75s ease; }
+  .feed-item:after {
+    content: '';
+    display: inline-block;
+    padding-top: 100%; }
+  @media screen and (min-width: 450px) {
+    .feed-item {
+      width: calc(100% / 3); } }
+  @media screen and (min-width: 769px) {
+    .feed-item {
+      width: 25%; } }
 
-.feed-item-img {
-  width: 100%; }
+.feed-item-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-box-shadow: inset 0px 0px 65px 15px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 0px 0px 65px 15px rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0px 0px 65px 15px rgba(0, 0, 0, 0.75); }
 
 .feed-controls {
   background: -moz-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.07) 6%, rgba(0, 0, 0, 0.57) 29%, rgba(0, 0, 0, 0.66) 42%, rgba(0, 0, 0, 0.8) 58%, rgba(0, 0, 0, 0.93) 85%, rgba(0, 0, 0, 0.95) 89%);
@@ -108,7 +126,7 @@ header {
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#f2000000',GradientType=0 );
   /* IE6-9 */
-  height: 150px;
+  height: 200px;
   position: fixed;
   bottom: 0;
   right: 0;
