@@ -11,12 +11,17 @@ app.selectedPhoto = function(){
           if (photo === null) {
             self.close();
           } else {
-            selectedPhotoImg.src = photo.url_o;
+            var img = new Image();
+            selectedPhotoImg.src = photo.url_l;
             selectedPhotoImg.className = 'selected-photo-img';
             selectedPhotoImg.alt = photo.title;
             selectedPhotoImg.onload = function(){
               selectedPhotoContainer.style.backgroundImage = 'url('+photo.url_l+')';
               selectedPhotoCopy.appendChild(selectedPhotoImg);
+            };
+            img.src = photo.url_o;
+            img.onload = function(){
+              selectedPhotoContainer.style.backgroundImage = 'url('+photo.url_o+')';
               // e.target.parentElement.className += ' img-loaded';
             };
             selectedPhotoContainer.className += ' active'
