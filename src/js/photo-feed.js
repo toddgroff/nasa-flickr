@@ -28,7 +28,7 @@ app.photoFeed = function(){
 
         img.src = photo.url_l;
         img.onload = function(){
-          // var newClass = anchor.className.replace(/img-not-loaded/i, 'img-loaded');
+          // var newClass = anchor.className.replace(/img-not-loaded/g, 'img-loaded');
           // anchor.className = newClass;
           item.style.backgroundImage = 'url('+img.src+')';
         }
@@ -63,7 +63,6 @@ app.photoFeed = function(){
       setSelectPhoto: function(){
         photoFeedList.addEventListener('click', function(e){
           var parent = e.target.parentElement;
-          console.log('id from target', anchor.nodeName.toLowerCase() === 'a');
           if (parent.nodeName.toLowerCase() === 'a') app.photos.currentSelected = parent.id;
         });
       },
@@ -77,7 +76,7 @@ app.photoFeed = function(){
         self.sortFeed();
         self.loadMoreToFeed();
         self.setSelectPhoto();
-        app.selected.setclose();
+        app.selected.setClose();
       }
     };
   return self;

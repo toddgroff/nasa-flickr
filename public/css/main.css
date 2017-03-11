@@ -53,6 +53,7 @@ html {
 body {
   background: black;
   color: white;
+  font-family: sans-serif;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto; }
@@ -74,22 +75,28 @@ header {
       width: 150px;
       margin: 20px; } }
 
+h2, p {
+  margin: 1em 0;
+  line-height: 1.5; }
+
+h2, button {
+  font-size: 1.25em;
+  text-transform: uppercase;
+  letter-spacing: 3px; }
+
 button {
   padding: 0.75em;
   margin-bottom: 0.75em;
   background: transparent;
-  color: rgba(255, 255, 255, 0.85);
-  text-transform: uppercase;
-  font-size: 1.25em;
-  font-family: sans-serif;
-  letter-spacing: 3px;
-  outline: 2px solid rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.75);
+  border: 2px solid rgba(255, 255, 255, 0.75);
   transition: all 0.5s ease;
   cursor: pointer;
   width: 100%; }
   button:hover, button:focus {
     color: rgba(0, 0, 0, 0.5);
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.75);
+    border-color: transparent;
     transition: all 0.5s ease; }
   @media screen and (min-width: 450px) {
     button {
@@ -100,31 +107,78 @@ button {
   top: 0;
   bottom: 100%;
   z-index: 20;
-  overflow: hidden;
-  /*max-height: 0;*/
-  opacity: 0; }
+  background-color: transparent;
+  visibility: hidden;
+  padding: 2em;
+  background-size: cover;
+  overflow: auto;
+  -webkit-transition: all 0.75s ease-in-out;
+  -moz-transition: all 0.75s ease-in-out;
+  transition: all 0.75s ease-in-out; }
   .selected-photo-container.active {
-    /*max-height: 2500px; //cannot animate "auto" value, so using max-height set to something larger than necessary*/
-    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.75);
     left: 0;
     right: 0;
     bottom: 0;
+    visibility: visible;
     -webkit-transition: all 0.75s ease-in-out;
     -moz-transition: all 0.75s ease-in-out;
-    transition: all 0.75s ease-in-out;
-    /*@include transition(max-height 0.75s ease-in-out, opacity 0.5s ease-out);*/ }
+    transition: all 0.75s ease-in-out; }
 
 .selected-photo-close {
   position: fixed;
-    position-top: 20px;
-    position-right: 20px; }
+  top: 20px;
+  right: 20px;
+  width: initial; }
 
 .selected-photo-copy {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0; }
+  margin-top: 80px;
+  padding: 2em;
+  background: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  box-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  -ms-align-items: flex-start;
+  -o-align-items: flex-start;
+  align-items: flex-start;
+  -ms-flex-align: start; }
+  @media screen and (min-width: 450px) {
+    .selected-photo-copy {
+      -webkit-box-orient: horizontal;
+      -moz-box-orient: horizontal;
+      box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -moz-box-direction: normal;
+      box-direction: normal;
+      -webkit-flex-direction: row;
+      -moz-flex-direction: row;
+      flex-direction: row;
+      -ms-flex-direction: row; } }
+
+.selected-photo-img {
+  width: 100%; }
+  @media screen and (min-width: 450px) {
+    .selected-photo-img {
+      width: 25%; } }
 
 .photo-feed-list {
   display: -webkit-box;
