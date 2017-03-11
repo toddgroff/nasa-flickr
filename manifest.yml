@@ -1,5 +1,5 @@
 ---
 applications:
- - name: GetStartedNode
+ - name: NASA Flickr
    random-route: true
    memory: 256M
