@@ -2,11 +2,18 @@ $max-width: 100%;
 $tablet: min-width 450px;
 $desktop: min-width 769px;
 
+$trans-white: rgba(white, 0.75);
+$trans-black: rgba(black, 0.5);
+
 body {
   background: black;
   color: white;
   font-family: sans-serif;
   @include outer-container;
+}
+
+a {
+  color: aqua;
 }
 
 header {
@@ -17,17 +24,21 @@ header {
 
 .nasa-logo {
   width: 75px;
-  margin: 10px;
+  margin: 10px 0 0 10px;
 
   @include media($tablet) {
     width: 150px;
-    margin: 20px;
+    margin: 20px 0 0 20px;
   }
 }
 
 h2, p {
   margin: 1em 0;
-  line-height: 1.5;
+  line-height: 1.5
+}
+
+p {
+  line-height: 1.75;
 }
 
 h2, button {
@@ -39,15 +50,15 @@ h2, button {
 button {
   padding: 0.75em;
   background: transparent;
-  color: rgba(white, 0.75);
-  border: 2px solid rgba(white, 0.75);
+  color: $trans-white;
+  border: 2px solid $trans-white;
   transition: all 0.5s ease;
   cursor: pointer;
   width: 100%;
 
   &:hover, &:focus {
-    color: rgba(black,0.5);
-    background: rgba(white, 0.75);
+    color: $trans-black;
+    background: $trans-white;
     border-color: transparent;
     transition: all 0.5s ease;
   }
@@ -89,7 +100,7 @@ button[data-sort-dir="1"] {
   @include transition(all 0.75s ease-in-out);
 
   &.active {
-    background-color: rgba(black, 0.75);
+    background-color: $trans-black;
     left: 0;
     right: 0;
     bottom: 0;
@@ -103,12 +114,18 @@ button[data-sort-dir="1"] {
   top: 20px;
   right: 20px;
   width: initial;
+  font-size: 1.75em;
+  padding: 0.25em 0.25em 0.25em 0.35em;
+
+  &:after {
+    content: "\2715";
+  }
 }
 
 .selected-photo-copy {
   margin-top: 80px;
   padding: 2em;
-  background:rgba(black, 0.5);
+  background: $trans-black;
   @include display(flex);
   @include flex-direction(column);
   @include align-items(flex-start);
@@ -122,7 +139,7 @@ button[data-sort-dir="1"] {
   width: 100%;
 
   @include media($tablet) {
-    width: 25%;
+    width: 33%;
   }
 }
 

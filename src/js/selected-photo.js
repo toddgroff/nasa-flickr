@@ -32,11 +32,11 @@ app.selectedPhoto = function(){
           }
         },
         setClose: function(){
+          document.addEventListener('keydown', function(e){
+            if (e.keyCode == 27) app.photos.currentSelected = null;
+          }, false);
           selectedPhotoClose.addEventListener('click',function(){
             app.photos.currentSelected = null;
-          });
-          selectedPhotoClose.addEventListener('keyup', function(e){
-            if (e.keyCode === 27) app.photos.currentSelected = null;
           }, false);
         },
         close: function(){

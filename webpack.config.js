@@ -1,5 +1,5 @@
 var conf = {
-  entry: 'views/js',
+  entry: 'src/js',
   output: {
     path: './public/js/',
     filename: 'app.js'
