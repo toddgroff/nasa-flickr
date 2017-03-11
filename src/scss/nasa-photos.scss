@@ -38,7 +38,6 @@ h2, button {
 
 button {
   padding: 0.75em;
-  margin-bottom: 0.75em;
   background: transparent;
   color: rgba(white, 0.75);
   border: 2px solid rgba(white, 0.75);
@@ -57,6 +56,25 @@ button {
     width: inherit;
   }
 }
+
+button[data-sort-dir]:after {
+  display: inline-block;
+  margin-left: 0.5em;
+}
+
+button[data-sort-dir="-1"] {
+  &:after {
+    content: "\2193";
+  }
+}
+
+button[data-sort-dir="1"] {
+
+  &:after {
+    content: "\2191";
+  }
+}
+
 
 .selected-photo-container {
   position: fixed;
@@ -167,8 +185,12 @@ button {
   text-align: center;
   @include display(flex);
   @include align-items(center);
-  @include justify-content(space-around);
+  @include justify-content(center);
   @include flex-direction(column);
+
+  > * {
+    margin: 0.5em;
+  }
 
   @include media($tablet){
     @include flex-direction(row);
