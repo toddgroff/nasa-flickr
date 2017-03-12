@@ -61,9 +61,22 @@ app.photoFeed = function(){
         });
       },
       setSelectPhoto: function(){
+        var evtParent = function(e){
+              return e.target.parentElement;
+            },
+            isAnchor = function(elem){
+              return (elem.nodeName.toLowerCase() === 'a');
+            },
+            set = function(e, parent){
+              var useParent = parent || false;
+              e.preventDefault();
+              app.photos.currentSelected = useParent ? evtParent(e).id : e.target.id;
+            };
         photoFeedList.addEventListener('click', function(e){
-          var parent = e.target.parentElement;
-          if (parent.nodeName.toLowerCase() === 'a') app.photos.currentSelected = parent.id;
+          if (isAnchor(evtParent(e))) set(e, true);
+        });
+        photoFeedList.addEventListener('keydown', function(e){
+          if (isAnchor(e.target) && e.keyCode === 13) set(e);
         });
       },
       init: function(){
