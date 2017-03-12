@@ -1,6 +1,7 @@
 app.selectedPhoto = function(){
   var selectedPhotoContainer = document.getElementById('selected-photo-container'),
       selectedPhotoTitle = document.getElementById('selected-photo-title'),
+      selectedPhotoUpload = document.getElementById('selected-upload-date'),
       selectedPhotoDesc = document.getElementById('selected-photo-description'),
       selectedPhotoClose = document.getElementById('selected-photo-close'),
       selectedPhotoCopy = document.getElementById('selected-photo-copy'),
@@ -26,6 +27,7 @@ app.selectedPhoto = function(){
             };
             selectedPhotoContainer.className += ' active'
             selectedPhotoTitle.innerHTML = photo.title;
+            selectedPhotoUpload.innerHTML = new Date(photo.dateupload * 1000).toString().split(" ").slice(0, 4).join(" ");
             selectedPhotoDesc.innerHTML = photo.description._content;
             // Focus on close button for keyboard use
             selectedPhotoClose.focus();

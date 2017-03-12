@@ -7,7 +7,7 @@ app.flickrApi = function(){
       var endpoint = '.people.getPublicPhotos',
           params = '&user_id=24662369@N07',
           perPage = 36,
-          extras = '&extras=date_upload,description,url_l,url_o&per_page='+perPage+'&page='+pageNum,
+          extras = '&extras=date_upload,date_taken,description,url_l,url_o&per_page='+perPage+'&page='+pageNum,
           url = baseUrl+endpoint+auth+params+format+extras;
       return self.sendRequestPromise(url);
     },
