@@ -99,13 +99,17 @@ button {
   background: transparent;
   color: rgba(255, 255, 255, 0.75);
   border: 2px solid rgba(255, 255, 255, 0.75);
-  transition: all 0.5s ease;
   cursor: pointer;
-  width: 100%; }
+  width: 100%;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
   button:hover, button:focus {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.75);
     background: rgba(255, 255, 255, 0.75);
     border-color: transparent;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
     transition: all 0.5s ease; }
   @media screen and (min-width: 450px) {
     button {
@@ -135,7 +139,7 @@ button[data-sort-dir="1"]:after {
   -moz-transition: all 0.75s ease-in-out;
   transition: all 0.75s ease-in-out; }
   .selected-photo-container.active {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.75);
     left: 0;
     right: 0;
     bottom: 0;
@@ -157,7 +161,7 @@ button[data-sort-dir="1"]:after {
 .selected-photo-copy {
   margin-top: 80px;
   padding: 2em;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.75);
   display: -webkit-box;
   display: -moz-box;
   display: box;
@@ -183,8 +187,17 @@ button[data-sort-dir="1"]:after {
   -ms-align-items: flex-start;
   -o-align-items: flex-start;
   align-items: flex-start;
-  -ms-flex-align: start; }
-  @media screen and (min-width: 450px) {
+  -ms-flex-align: start;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+  -ms-flex-pack: justify; }
+  @media screen and (min-width: 769px) {
     .selected-photo-copy {
       -webkit-box-orient: horizontal;
       -moz-box-orient: horizontal;
@@ -197,11 +210,20 @@ button[data-sort-dir="1"]:after {
       flex-direction: row;
       -ms-flex-direction: row; } }
 
+.photo-tag {
+  background: rgba(255, 255, 255, 0.75);
+  color: rgba(0, 0, 0, 0.75);
+  padding: 0.25em 0.5em;
+  font-weight: bold;
+  margin: 0.25em 0.5em 0.25em 0;
+  display: inline-block; }
+
 .selected-photo-img {
   width: 100%; }
-  @media screen and (min-width: 450px) {
+  @media screen and (min-width: 769px) {
     .selected-photo-img {
-      width: 33%; } }
+      width: 32%;
+      margin-left: 2%; } }
 
 .photo-feed-list {
   display: -webkit-box;
@@ -214,6 +236,25 @@ button[data-sort-dir="1"]:after {
   -webkit-flex-flow: row wrap;
   -moz-flex-flow: row wrap;
   flex-flow: row wrap; }
+
+.loading-photos-message {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  visibility: hidden;
+  height: 0;
+  opacity: 0;
+  text-align: center;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  transition: all 1s ease; }
+  .loading-photos-message.active {
+    visibility: visible;
+    height: auto;
+    opacity: 1;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    transition: all 1s ease; }
 
 .feed-item {
   width: 50%;

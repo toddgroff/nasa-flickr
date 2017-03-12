@@ -3,7 +3,7 @@ $tablet: min-width 450px;
 $desktop: min-width 769px;
 
 $trans-white: rgba(white, 0.75);
-$trans-black: rgba(black, 0.5);
+$trans-black: rgba(black, 0.75);
 
 body {
   background: black;
@@ -57,15 +57,15 @@ button {
   background: transparent;
   color: $trans-white;
   border: 2px solid $trans-white;
-  transition: all 0.5s ease;
   cursor: pointer;
   width: 100%;
+  @include transition(all 0.5s ease);
 
   &:hover, &:focus {
     color: $trans-black;
     background: $trans-white;
     border-color: transparent;
-    transition: all 0.5s ease;
+    @include transition(all 0.5s ease);
   }
 
   @include media($tablet){
@@ -134,23 +134,52 @@ button[data-sort-dir="1"] {
   @include display(flex);
   @include flex-direction(column);
   @include align-items(flex-start);
+  @include justify-content(space-between);
 
-  @include media($tablet){
+  @include media($desktop){
     @include flex-direction(row);
   }
+}
+
+.photo-tag {
+  background: $trans-white;
+  color: $trans-black;
+  padding: 0.25em 0.5em;
+  font-weight: bold;
+  margin: 0.25em 0.5em 0.25em 0;
+  display: inline-block;
 }
 
 .selected-photo-img {
   width: 100%;
 
-  @include media($tablet) {
-    width: 33%;
+  @include media($desktop) {
+    width: 32%;
+    margin-left: 2%;
   }
 }
 
 .photo-feed-list {
   @include display(flex);
   @include flex-flow(row wrap);
+}
+
+.loading-photos-message {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  visibility: hidden;
+  height: 0;
+  opacity: 0;
+  text-align: center;
+  @include transition(all 1s ease);
+
+  &.active {
+    visibility: visible;
+    height: auto;
+    opacity: 1;
+    @include transition(all 1s ease);
+  }
 }
 
 .feed-item {

@@ -53,7 +53,7 @@ app.PhotoStore = function() {
         },
         load: function() {
           self.currentPageNum += 1
-          console.count();
+          // console.count();
           var loadedPhotosPromise = app.api.getPhotos(self.currentPageNum);
           self.add(loadedPhotosPromise);
           return loadedPhotosPromise;

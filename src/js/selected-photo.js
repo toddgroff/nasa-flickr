@@ -2,6 +2,7 @@ app.selectedPhoto = function(){
   var selectedPhotoContainer = document.getElementById('selected-photo-container'),
       selectedPhotoTitle = document.getElementById('selected-photo-title'),
       selectedPhotoUpload = document.getElementById('selected-upload-date'),
+      selectedPhotoTags = document.getElementById('selected-photo-tags'),
       selectedPhotoDesc = document.getElementById('selected-photo-description'),
       selectedPhotoClose = document.getElementById('selected-photo-close'),
       selectedPhotoCopy = document.getElementById('selected-photo-copy'),
@@ -28,10 +29,19 @@ app.selectedPhoto = function(){
             selectedPhotoContainer.className += ' active'
             selectedPhotoTitle.innerHTML = photo.title;
             selectedPhotoUpload.innerHTML = new Date(photo.dateupload * 1000).toString().split(" ").slice(0, 4).join(" ");
+            selectedPhotoTags.innerHTML = '';
+            if (photo.tags.length > 0) {
+              var tags = photo.tags.split(' ');
+              for (var i = 0; i < tags.length; ++i) {
+                var tagEl = document.createElement('span');
+                tagEl.innerText = tags[i];
+                tagEl.className = 'photo-tag';
+                selectedPhotoTags.appendChild(tagEl);
+              }
+            }
             selectedPhotoDesc.innerHTML = photo.description._content;
             // Focus on close button for keyboard use
             selectedPhotoClose.focus();
-            selectedFeedItem.tabIndex = 1;
             // TODO: switch the assignment below for the call to getBestSize to get the best available image
             // selectedPhotoImg = app.photo.getBestSize();
           }

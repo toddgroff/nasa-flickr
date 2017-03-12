@@ -49,15 +49,35 @@ app.photoFeed = function(){
           app.photos.sort(sortDir, cb);
         });
       },
+      filterFeed: function(){
+        
+      },
       loadMoreToFeed: function(){
-        document.getElementById('load-more-photos').addEventListener('click', function(){
-          app.photos.load().then(function(resp){
-            var newPhotos = resp.data.photos.photo;
-            self.renderItems(newPhotos);
-            document.getElementById(newPhotos[0].id).focus();
-          }).catch(function(err){
-            console.log('Error:', err);
-          });
+        // document.getElementById('load-more-photos').addEventListener('click', function(){
+        //   app.photos.load().then(function(resp){
+        //     var newPhotos = resp.data.photos.photo;
+        //     self.renderItems(newPhotos);
+        //     document.getElementById(newPhotos[0].id).focus();
+        //   }).catch(function(err){
+        //     console.log('Error:', err);
+        //   });
+        // });
+        // window.onscroll = function(ev) {
+        window.addEventListener('scroll', function(ev) {
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            var loadingMessage = document.getElementById('loading-photos-message');
+            loadingMessage.className += ' active';
+            app.photos.load().then(function(resp){
+              var newPhotos = resp.data.photos.photo;
+              self.renderItems(newPhotos);
+              document.getElementById(newPhotos[0].id).focus();
+              setTimeout(function(){
+                loadingMessage.className = loadingMessage.className.replace(/active/g, '');
+              }, 1000);
+            }).catch(function(err){
+              console.log('Error:', err);
+            });
+          }
         });
       },
       setSelectPhoto: function(){
