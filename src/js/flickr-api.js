@@ -33,5 +33,5 @@ app.flickrApi = function(){
 };
 
 // Example request urls:
-// https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=a5e95177da353f58113fd60296e1d250&user_id=24662369@N07&format=json&nojsoncallback=1&extras=date_upload,description,url_l,url_o&per_page=32&page=1
+https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=a5e95177da353f58113fd60296e1d250&user_id=24662369@N07&format=json&nojsoncallback=1&extras=date_upload,description,url_l,url_o,tags,count_faves&per_page=32&page=1
 // https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=a5e95177da353f58113fd60296e1d250&format=json&nojsoncallback=1&photo_id=30651540721
