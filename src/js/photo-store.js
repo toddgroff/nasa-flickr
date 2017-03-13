@@ -9,6 +9,14 @@ app.PhotoStore = function() {
           // console.log('There are now %s photos', this._photos.length);
           // console.log('The first photo is now %s', this._photos[0].title);
         },
+        _hidden: [],
+        get hiddenPhotos(){
+          return this._hidden;
+        },
+        set visiblePhotos(newHiddenPhotos){
+          this._hidden = newHiddenPhotos;
+          app.feed.filterFeed(this._hidden);
+        },
         _selected: null,
         get currentSelected(){
           return this._selected;
@@ -42,14 +50,19 @@ app.PhotoStore = function() {
               return 1;
             }
           });
-          var newDates = []
-          for (var sPh in sortedPhotos) {
-            newDates.push(sPh.dateupload);
-          }
           self.currentPhotos = sortedPhotos;
+          // for focusing on first photo after sort
           if (typeof cb !== "undefined") {
             cb();
           }
+        },
+        filter: function(tagsOnly){
+          var noTags = function(photo){
+                return photo.tags.length < 1;
+              },
+              filteredOutPhotos = this.currentPhotos.filter(noTags);
+          // if tags only param passed filter, otherwise, set all photos to visible
+          this.hiddenPhotos = this.currentPhotos.filter(noTags)
         },
         load: function() {
           self.currentPageNum += 1

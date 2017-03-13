@@ -49,8 +49,31 @@ app.photoFeed = function(){
           app.photos.sort(sortDir, cb);
         });
       },
+      setFilterFeed: function(){
+        document.getElementById('filter-by-tags').addEventListener('click', function(){
+          var tagsOnly = e.target.getAttribute('data-tags-only');
+          app.photos.filter(tagsOnly);
+        });
+      },
       filterFeed: function(){
-        
+        var filterButton = document.getElementById('filter-by-tags'),
+            hiddenPhotos = app.photos.hiddenPhotos;
+
+        if (hiddenPhotos.length > 0) {}
+          for ( var i = 0; i < hiddenPhotos; ++i) {
+            document.getElementById(hiddenPhotos[i].id).parentElement.className.+= ' hidden';
+          }
+          filterButton.setAttribute('data-tags-only', true);
+          filterButton.innerText = 'show all photos';
+        } else {
+          var hiddenItems = document.querySelectorAll('.hidden');
+          for (var i = 0; i < hiddenItems.length; ++i) {
+            var newClasses = hiddenItems[i].className.replace(/hidden/g, '');
+            hiddenItem[i].className = newClasses;
+          }
+          filterButton.setAttribute('data-tags-only', true);
+          filterButton.innerText = 'show tagged photos';
+        }
       },
       loadMoreToFeed: function(){
         // document.getElementById('load-more-photos').addEventListener('click', function(){
@@ -62,7 +85,6 @@ app.photoFeed = function(){
         //     console.log('Error:', err);
         //   });
         // });
-        // window.onscroll = function(ev) {
         window.addEventListener('scroll', function(ev) {
           if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
             var loadingMessage = document.getElementById('loading-photos-message');
@@ -107,6 +129,7 @@ app.photoFeed = function(){
           console.log('Error:', err);
         });
         self.sortFeed();
+        self.filterFeed();
         self.loadMoreToFeed();
         self.setSelectPhoto();
         app.selected.setClose();

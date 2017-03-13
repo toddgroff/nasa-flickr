@@ -6,7 +6,7 @@ app.selectedPhoto = function(){
       selectedPhotoDesc = document.getElementById('selected-photo-description'),
       selectedPhotoClose = document.getElementById('selected-photo-close'),
       selectedPhotoCopy = document.getElementById('selected-photo-copy'),
-      selectedPhotoImg = document.createElement('img'),
+      selectedPhotoImg = document.getElementById('selected-photo-img'),
       self = {
         render: function(photo){
           if (photo === null) {
