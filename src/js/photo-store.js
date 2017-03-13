@@ -4,19 +4,20 @@ app.PhotoStore = function() {
         get currentPhotos(){
           return this._photos;
         },
-        set currentPhotos(newPhotos){
-          this._photos = newPhotos;
+        set currentPhotos(photos){
+          this._photos = photos;
           // console.log('There are now %s photos', this._photos.length);
           // console.log('The first photo is now %s', this._photos[0].title);
         },
-        _hidden: [],
-        get hiddenPhotos(){
-          return this._hidden;
-        },
-        set visiblePhotos(newHiddenPhotos){
-          this._hidden = newHiddenPhotos;
-          app.feed.filterFeed(this._hidden);
-        },
+        // the hidden behavior was acting kinda weird
+        // _hidden: [],
+        // get hiddenPhotos(){
+        //   return this._hidden;
+        // },
+        // set hiddenPhotos(photos){
+        //   this._hidden = photos;
+        //   app.feed.filterFeed();
+        // },
         _selected: null,
         get currentSelected(){
           return this._selected;
@@ -42,9 +43,9 @@ app.PhotoStore = function() {
             console.log('Error:', err);
           });
         },
-        sort: function(dir, cb){
+        sort: function(dir, prop, cb){
           var sortedPhotos = this.currentPhotos.sort(function(a,b){
-            if ((dir > 0 && a.dateupload < b.dateupload) || (dir < 0 && a.dateupload > b.dateupload)) {
+            if ((dir > 0 && parseInt(a[prop]) < parseInt(b[prop])) || (dir < 0 && parseInt(a[prop]) > parseInt(b[prop]))) {
               return -1;
             } else {
               return 1;
@@ -56,14 +57,15 @@ app.PhotoStore = function() {
             cb();
           }
         },
-        filter: function(tagsOnly){
-          var noTags = function(photo){
-                return photo.tags.length < 1;
-              },
-              filteredOutPhotos = this.currentPhotos.filter(noTags);
-          // if tags only param passed filter, otherwise, set all photos to visible
-          this.hiddenPhotos = this.currentPhotos.filter(noTags)
-        },
+        // This had some weird behavior with infinite scroll and with revealing all, maybe later
+        // filter: function(tagsOnly){
+        //   var noTags = function(photo){
+        //         return photo.tags.length < 1;
+        //       },
+        //       filteredOutPhotos = this.currentPhotos.filter(noTags);
+        //   // if tags only param passed filter, otherwise, set all photos to visible
+        //   this.hiddenPhotos = tagsOnly ? filteredOutPhotos : [];
+        // },
         load: function() {
           self.currentPageNum += 1
           // console.count();

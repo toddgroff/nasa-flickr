@@ -19,7 +19,8 @@
       <div id="selected-photo-copy" class="selected-photo-copy">
         <div class="selected-photo-text">
           <h2 id="selected-photo-title" class="selected-photo-title"></h2>
-          <h3>uploaded <span id="selected-upload-date"></span></h3>
+          <span class="selected-upload-date">uploaded <span id="selected-upload-date"></span></span>
+          <span id="selected-fave-count" class="selected-fave-count"></span>
           <div id="selected-photo-tags"></div>
           <p id="selected-photo-description" class="selected-photo-description"></p>
         </div>
@@ -32,8 +33,9 @@
       </ul>
       <div class="feed-controls">
         <p id="loading-photos-message" class="loading-photos-message">Loading more photos...</p>
-        <button id="sort-by-date" data-sort-dir="1">sort by date</button>
-        <button id="filter-by-tags" data-tags-only="true">show tagged photos</button>
+        <button id="sort-by-date" data-sort-dir="1" data-sort-prop="dateupload">sort by date</button>
+        <button id="sort-by-faves" data-sort-dir="-1" data-sort-prop="count_faves">sort by faves</button>
+        <!-- <button id="filter-by-tags" data-tags-only="true">show tagged photos</button> -->
       </div>
     </div>
   </div>

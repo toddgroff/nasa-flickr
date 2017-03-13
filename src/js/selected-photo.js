@@ -2,6 +2,7 @@ app.selectedPhoto = function(){
   var selectedPhotoContainer = document.getElementById('selected-photo-container'),
       selectedPhotoTitle = document.getElementById('selected-photo-title'),
       selectedPhotoUpload = document.getElementById('selected-upload-date'),
+      selectedFaveCount = document.getElementById('selected-fave-count'),
       selectedPhotoTags = document.getElementById('selected-photo-tags'),
       selectedPhotoDesc = document.getElementById('selected-photo-description'),
       selectedPhotoClose = document.getElementById('selected-photo-close'),
@@ -29,6 +30,7 @@ app.selectedPhoto = function(){
             selectedPhotoContainer.className += ' active'
             selectedPhotoTitle.innerHTML = photo.title;
             selectedPhotoUpload.innerHTML = new Date(photo.dateupload * 1000).toString().split(" ").slice(0, 4).join(" ");
+            selectedFaveCount.innerHTML = photo.count_faves;
             selectedPhotoTags.innerHTML = '';
             if (photo.tags.length > 0) {
               var tags = photo.tags.split(' ');

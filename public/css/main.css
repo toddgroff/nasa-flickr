@@ -78,10 +78,6 @@ header {
       width: 150px;
       margin: 20px 0 0 20px; } }
 
-h3 {
-  font-style: italic;
-  font-size: 1.15em; }
-
 h3, p {
   margin: 1em 0;
   line-height: 1.5; }
@@ -210,6 +206,22 @@ button[data-sort-dir="1"]:after {
       flex-direction: row;
       -ms-flex-direction: row; } }
 
+.selected-upload-date {
+  font-style: italic;
+  font-size: 1.15em; }
+  .selected-upload-date:after {
+    content: '|';
+    margin: 0 0.75em 0 1.25em;
+    font-style: normal; }
+
+.selected-fave-count {
+  margin: 1em 0;
+  display: inline-block;
+  font-size: 1.15em; }
+  .selected-fave-count:before {
+    content: '\2605';
+    margin-right: 0.25em; }
+
 .photo-tag {
   background: rgba(255, 255, 255, 0.75);
   color: rgba(0, 0, 0, 0.75);
@@ -238,6 +250,8 @@ button[data-sort-dir="1"]:after {
   flex-flow: row wrap; }
 
 .loading-photos-message {
+  text-transform: uppercase;
+  letter-spacing: 2px;
   position: absolute;
   top: 0;
   right: 0;
@@ -275,6 +289,8 @@ button[data-sort-dir="1"]:after {
     content: '';
     display: inline-block;
     padding-top: 100%; }
+  .feed-item.hidden {
+    display: none; }
   @media screen and (min-width: 450px) {
     .feed-item {
       width: calc(100% / 3); } }

@@ -37,54 +37,52 @@ app.photoFeed = function(){
         item.className = 'feed-item';
         return item;
       },
-      sortFeed: function(){
+      sortFeed: function(e){
+        var sortDir = parseInt(e.target.getAttribute('data-sort-dir')),
+            oppSortDir = sortDir* -1,
+            sortProp = e.target.getAttribute('data-sort-prop');
+            cb = function(){
+              self.renderItems(app.photos.currentPhotos, true);
+              document.getElementById(app.photos.currentPhotos[0].id).focus();
+              e.target.setAttribute('data-sort-dir', oppSortDir);
+            };
+        app.photos.sort(sortDir, sortProp, cb);
+      },
+      setSortFeed: function(){
         document.getElementById('sort-by-date').addEventListener('click', function(e){
-          var sortDir = parseInt(e.target.getAttribute('data-sort-dir'));
-              oppSortDir = sortDir* -1,
-              cb = function(){
-                self.renderItems(app.photos.currentPhotos, true);
-                document.getElementById(app.photos.currentPhotos[0].id).focus();
-                e.target.setAttribute('data-sort-dir', oppSortDir);
-              };
-          app.photos.sort(sortDir, cb);
-        });
+          self.sortFeed(e);
+        }, false);
+        document.getElementById('sort-by-faves').addEventListener('click', function(e){
+          self.sortFeed(e);
+        }, false);
       },
-      setFilterFeed: function(){
-        document.getElementById('filter-by-tags').addEventListener('click', function(){
-          var tagsOnly = e.target.getAttribute('data-tags-only');
-          app.photos.filter(tagsOnly);
-        });
-      },
-      filterFeed: function(){
-        var filterButton = document.getElementById('filter-by-tags'),
-            hiddenPhotos = app.photos.hiddenPhotos;
-
-        if (hiddenPhotos.length > 0) {}
-          for ( var i = 0; i < hiddenPhotos; ++i) {
-            document.getElementById(hiddenPhotos[i].id).parentElement.className.+= ' hidden';
-          }
-          filterButton.setAttribute('data-tags-only', true);
-          filterButton.innerText = 'show all photos';
-        } else {
-          var hiddenItems = document.querySelectorAll('.hidden');
-          for (var i = 0; i < hiddenItems.length; ++i) {
-            var newClasses = hiddenItems[i].className.replace(/hidden/g, '');
-            hiddenItem[i].className = newClasses;
-          }
-          filterButton.setAttribute('data-tags-only', true);
-          filterButton.innerText = 'show tagged photos';
-        }
-      },
+      // setFilterFeed: function(){
+      //   document.getElementById('filter-by-tags').addEventListener('click', function(e){
+      //     var tagsOnly = e.target.getAttribute('data-tags-only');
+      //     app.photos.filter(tagsOnly);
+      //   });
+      // },
+      // filterFeed: function(){
+      //   var filterButton = document.getElementById('filter-by-tags'),
+      //       hiddenPhotos = app.photos.hiddenPhotos;
+      //
+      //   if (hiddenPhotos.length > 0) {
+      //     for ( var i = 0; i < hiddenPhotos.length; ++i) {
+      //       document.getElementById(hiddenPhotos[i].id).parentElement.className += ' hidden';
+      //     }
+      //     filterButton.setAttribute('data-tags-only', false);
+      //     filterButton.innerText = 'show all photos';
+      //   } else {
+      //     var hiddenItems = document.querySelectorAll('.hidden');
+      //     for (var i = 0; i < hiddenItems.length; ++i) {
+      //       var newClasses = hiddenItems[i].className.replace(/hidden/g, '');
+      //       hiddenItems[i].className = newClasses;
+      //     }
+      //     filterButton.setAttribute('data-tags-only', true);
+      //     filterButton.innerText = 'show tagged photos';
+      //   }
+      // },
       loadMoreToFeed: function(){
-        // document.getElementById('load-more-photos').addEventListener('click', function(){
-        //   app.photos.load().then(function(resp){
-        //     var newPhotos = resp.data.photos.photo;
-        //     self.renderItems(newPhotos);
-        //     document.getElementById(newPhotos[0].id).focus();
-        //   }).catch(function(err){
-        //     console.log('Error:', err);
-        //   });
-        // });
         window.addEventListener('scroll', function(ev) {
           if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
             var loadingMessage = document.getElementById('loading-photos-message');
@@ -128,8 +126,8 @@ app.photoFeed = function(){
         }).catch(function(err){
           console.log('Error:', err);
         });
-        self.sortFeed();
-        self.filterFeed();
+        self.setSortFeed();
+        // self.setFilterFeed();
         self.loadMoreToFeed();
         self.setSelectPhoto();
         app.selected.setClose();
