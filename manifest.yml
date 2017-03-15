@@ -3,3 +3,4 @@ applications:
  - name: NASA Flickr
    random-route: true
    memory: 256M
+   host: nasa-flickr

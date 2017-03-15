@@ -97,7 +97,7 @@ button[data-sort-dir="1"] {
   padding: 2em;
   background-size: cover;
   overflow: auto;
-  box-shadow: 0 30px 40px black;
+  box-shadow: 0 10px 70px $trans-black;
   @include transition(all 0.75s ease-in-out);
 
   &.active {
